@@ -42,7 +42,7 @@ There are two solutions to this:
 
 1. Add code that will explicitly register the required Resource Provider in the target Subscription, e.g
 
-```terraform
+```hcl
 resource "azurerm_resource_provider_registration" "example" {
     name = "Microsoft.KeyVault
     alias = provider.other_subscription
