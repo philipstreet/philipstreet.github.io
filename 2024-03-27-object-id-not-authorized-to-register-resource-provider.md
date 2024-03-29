@@ -44,7 +44,7 @@ Since I was working with two resource types - Virtual Networks and Key Vaults - 
 
 BUT....
 
-The Service Principal being used by the Service Connection had the correct RBAC permissions on both Subscriptions, i.e. Contributor, which should be enough to register a missing Resource Provider (Resource providers and resource types - Azure Resource Manager | Microsoft Learn). 
+The Service Principal being used by the Service Connection had the correct RBAC permissions on both Subscriptions, i.e. Contributor, which should be enough to register a missing Resource Provider. 
 
 ![alt text](image.png)
 
