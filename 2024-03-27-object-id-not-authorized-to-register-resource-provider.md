@@ -39,6 +39,7 @@ Unfortunately, that will only work if you have Terraform code that is directly t
 ## So, how do I fix it?
 
 There are two solutions to this:
+
 1. Add code that will explicitly register the required Resource Provider in the target Subscription, e.g
 
 ```terraform
