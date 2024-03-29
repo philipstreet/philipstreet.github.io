@@ -39,7 +39,7 @@ Unfortunately, that will only work if you have Terraform code that is directly t
 ## So, how do I fix it?
 
 There are two solutions to this:
-Add code that will explicitly register the required Resource Provider in the target Subscription, e.g
+1. Add code that will explicitly register the required Resource Provider in the target Subscription, e.g
 
 ```terraform
 resource "azurerm_resource_provider_registration" "example" {
@@ -48,7 +48,7 @@ resource "azurerm_resource_provider_registration" "example" {
 }
 ```
 
-If you have the permissions then manually register the Resource Provider yourself on the required Subscription.
+2. If you have the permissions then manually register the Resource Provider yourself on the required Subscription.
 
 ## Conclusion
 
