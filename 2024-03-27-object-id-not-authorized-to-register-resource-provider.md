@@ -10,32 +10,14 @@ Well, you would be right...and wrong. Let me explain.
 
 I had this issue recently when I was trying to use Terraform to create a Private Endpoint on an Azure Key Vault to a Virtual Network Subnet that was located in a different Subscription.
 
-Here's an excerpt from my Azure DevOps pipeline run.
+Here's the error from my Azure DevOps pipeline run.
 
-Execute: TF Apply
+![alt text](2024-03-27-object-id-not-authorized-to-register-resource-provider-pipeline.png)
 
-```
-azurerm_key_vault.my-kv: Modifying... [id=/subscriptions/.../resourceGroups/rg-kv-neu/providers/Microsoft.KeyVault/vaults/kv-dev-neu]
+The error was;
 
-azurerm_key_vault.my-kv: Still modifying... [id=/subscriptions/-...yVault/vaults/kv-dev-neu, 10s elapsed]
 
-│ Error: updating Key Vault (Subscription: "..."
-
-│ Resource Group Name: "rg-kv-neu"
-
-│ Key Vault Name: "kv-dev-neu"): vaults.VaultsClient#Update: Failure responding to request: StatusCode=400 -- Original Error: autorest/azure: Service returned an error. Status=400 Code="VirtualNetworkForbidden" Message="{\"Code\":\"AuthorizationFailed\",\"Message\":\"The client '...' with object id '...' does not have authorization to perform action 'microsoft.network/virtualnetworks/taggedTrafficConsumers/validate/action' over scope '/subscriptions/.../resourcegroups/.../providers/microsoft.network/virtualnetworks/.../taggedTrafficConsumers/Microsoft.KeyVault.northeurope' or the scope is invalid. If access was recently granted, please refresh your credentials.\"}"
-
-│   with azurerm_key_vault.my-kv,
-
-│   on main.tf line 6, in resource "azurerm_key_vault" "my-kv":
-
-│    6: resource "azurerm_key_vault" "my-kv" {
-
-##[error]Bash exited with code '1'.
-
-Finishing: Terraform apply
-```
-
+> The client '...' with object id '...' does not have authorization to perform action 'microsoft.network/virtualnetworks/taggedTrafficConsumers/validate/action' over scope '/subscriptions/.../resourcegroups/.../providers/microsoft.network/virtualnetworks/.../taggedTrafficConsumers/Microsoft.KeyVault.northeurope' or the scope is invalid. If access was recently granted, please refresh your credentials.\"
 ## What's the cause of this?
 
 After a bit of Googling (or Binging?) I worked out that "/validate/action" authorization is required to register a Resource Provider in a Subscription.
@@ -46,13 +28,13 @@ BUT....
 
 The Service Principal being used by the Service Connection had the correct RBAC permissions on both Subscriptions, i.e. Contributor, which should be enough to register a missing Resource Provider. 
 
-![alt text](image.png)
+![alt text](2024-03-27-object-id-not-authorized-to-register-resource-provider-mslearn.png)
 
 You must have permission to do the /register/action operation for the resource provider. The permission is included in the Contributor and Owner roles.
 
 Unfortunately, that will only work if you have Terraform code that is directly trying to manage a resource in a target Subscription.
 
-In my scenario, I was setting the Private Endpoint subnet_id attribute with the Virtual Network subnet located in a different Subscription. 
+**In my scenario, I was setting the Private Endpoint subnet_id attribute with the Virtual Network subnet located in a different Subscription.**
 
 ## So, how do I fix it?
 
@@ -69,6 +51,7 @@ resource "azurerm_resource_provider_registration" "example" {
 If you have the permissions then manually register the Resource Provider yourself on the required Subscription.
 
 ## Conclusion
+
 I hope this helps someone that experiences the same issue.
 
 As always, if you think there is a better way this could've been fixed then please leave a comment below.
