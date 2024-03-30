@@ -18,7 +18,7 @@ Here's the error from my Azure DevOps pipeline run.
 
 The error was;
 
-> The client '...' with object id '...' does not have authorization to perform action 'microsoft.network/virtualnetworks/taggedTrafficConsumers/validate/action' over scope '/subscriptions/.../resourcegroups/.../providers/microsoft.network/virtualnetworks/.../taggedTrafficConsumers/Microsoft.KeyVault.northeurope' or the scope is invalid. If access was recently granted, please refresh your credentials.\"
+>The client '...' with object id '...' does not have authorization to perform action 'microsoft.network/virtualnetworks/taggedTrafficConsumers/validate/action' over scope '/subscriptions/.../resourcegroups/.../providers/microsoft.network/virtualnetworks/.../taggedTrafficConsumers/Microsoft.KeyVault.northeurope' or the scope is invalid. If access was recently granted, please refresh your credentials.\"
 
 ## What's the cause of this?
 
@@ -44,12 +44,12 @@ There are two solutions to this:
 
 1. Add code that will explicitly register the required Resource Provider in the target Subscription, e.g
 
-```
-resource "azurerm_resource_provider_registration" "example" {
-    name = "Microsoft.KeyVault
-    alias = provider.other_subscription
-}
-```
+    ```java
+    resource "azurerm_resource_provider_registration" "example" {
+        name = "Microsoft.KeyVault"
+        alias = provider.other_subscription
+    }
+    ```
 
 1. If you have the permissions then manually register the Resource Provider yourself on the required Subscription.
 
