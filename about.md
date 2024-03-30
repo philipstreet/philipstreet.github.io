@@ -4,12 +4,11 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+Experienced Azure Platform Solution Architect with the following Microsoft Azure certifications:
 
-### More Information
+- [DevOps Engineer Expert](https://learn.microsoft.com/en-gb/users/philipstreet/credentials/62495125f8adc19a)
+- [Azure Security Engineer Associate](https://learn.microsoft.com/en-gb/users/philipstreet/credentials/336702d8cc7130fc)
+- [Azure Developer Associate](https://learn.microsoft.com/en-gb/users/philipstreet/credentials/fc547d80c215422e)
+- [Azure Network Engineer Associate](https://learn.microsoft.com/en-gb/users/philipstreet/credentials/ab4a6001d05a7b9f)
+- [Azure Administrator Associate](https://learn.microsoft.com/en-gb/users/philipstreet/credentials/707089c636b1f94f)
 
-A place to include any other types of information that you'd like to include about yourself.
-
-### Contact me
-
-[email@domain.com](mailto:email@domain.com)
