@@ -1,4 +1,7 @@
-# Object ID is not authorized to register Azure resource provider
+---
+layout: post
+title: Object ID is not authorized to register Azure resource provider
+---
 
 ## Introduction
 
