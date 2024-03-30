@@ -14,7 +14,7 @@ I had this issue recently when I was trying to use Terraform to create a Private
 
 Here's the error from my Azure DevOps pipeline run.
 
-![alt text](/images/2024-03-27-object-id-not-authorized-to-register-resource-provider-pipeline.png){:target="_blank"}
+[![Error message from Azure Devops pipeline run](/images/2024-03-27-object-id-not-authorized-to-register-resource-provider-pipeline.png)](/images/2024-03-27-object-id-not-authorized-to-register-resource-provider-pipeline.png)
 
 The error was;
 
