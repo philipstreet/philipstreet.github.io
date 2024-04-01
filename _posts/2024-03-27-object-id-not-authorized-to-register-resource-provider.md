@@ -44,12 +44,12 @@ There are two solutions to this:
 
 1. Add code that will explicitly register the required Resource Provider in the target Subscription, e.g
 
-    <div style="hcl language-hcl">
+    <code style="hcl language-hcl">
     resource "azurerm_resource_provider_registration" "example" {
         name = "Microsoft.KeyVault"
         alias = provider.other_subscription
     }
-    </div>
+    </code>
 
 1. If you have the permissions then manually register the Resource Provider yourself on the required Subscription.
 
