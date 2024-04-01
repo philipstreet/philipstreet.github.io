@@ -44,14 +44,14 @@ There are two solutions to this:
 
 1. Add code that will explicitly register the required Resource Provider in the target Subscription, e.g
 
-```java
-resource "azurerm_resource_provider_registration" "example" {
-    name = "Microsoft.KeyVault"
-    alias = provider.other_subscription
-}
-```
+    `
+    resource "azurerm_resource_provider_registration" "example" {
+        name = "Microsoft.KeyVault"
+        alias = provider.other_subscription
+    }
+    `
 
-2. If you have the permissions then manually register the Resource Provider yourself on the required Subscription.
+1. If you have the permissions then manually register the Resource Provider yourself on the required Subscription.
 
 ## Conclusion
 
