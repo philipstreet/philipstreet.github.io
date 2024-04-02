@@ -44,12 +44,12 @@ There are two solutions to this:
 
 1. Add code that will explicitly register the required Resource Provider in the target Subscription, e.g
 
-``` ruby
+<pre><code class="ruby language-ruby"> 
 resource "azurerm_resource_provider_registration" "example" {
     name = "Microsoft.KeyVault"
     alias = provider.other_subscription
 }
-```
+</code></pre>
 
 2. If you have the permissions then manually register the Resource Provider yourself on the required Subscription.
 
