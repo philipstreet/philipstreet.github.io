@@ -51,7 +51,7 @@ resource "azurerm_resource_provider_registration" "example" {
 }
 ```
 
-2. If you have the permissions then manually register the Resource Provider yourself on the required Subscription.
+1. If you have the permissions then manually register the Resource Provider yourself on the required Subscription.
 
 ## Conclusion
 
