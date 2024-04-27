@@ -51,6 +51,15 @@ resource "azurerm_resource_provider_registration" "example" {
 }
 {% endhighlight %}
 
+<pre>
+    <code class="language-hcl">
+        resource "azurerm_resource_provider_registration" "example" {
+            name = "Microsoft.KeyVault"
+            alias = provider.other_subscription
+        }
+    </code>
+</pre>
+
 1. If you have the permissions then manually register the Resource Provider yourself on the required Subscription.
 
 ## Conclusion
