@@ -16,6 +16,15 @@ I recently watched [Starship! One prompt to rule them all](https://www.youtube.c
 ![Windows Terminal](/images/2024-04-28-windows-terminal.png)
 ![WSL Ubuntu](/images/2024-04-28-wsl-ubuntu.png)
 
+Briefly, the above images are showing (from left to right);
+
+- The platform (Windows or Linux)
+- The shell (PowerShell or Bash)
+- I'm in the "dev-machine-config" folder
+- This is a GitHub repo
+- I'm in the "main" branch
+- The name of the Azure subscription that AZ CLI is currently logged into
+
 __*WARNING!*__ This article is written for Windows 11 users. Those on macOS or Linux may not have these issues and will need to follow slightly different instructions.
 
 After trying to follow Matt's instructions I discovered that not everything was going to work on my work laptop because I don't have the permissions to start / run a prompt with elevated privileges. Also, some of the tasks required to get Starship setup can be done in several different ways, some easy easier than others. So I thought it might be useful to document my findings here for the benefit of others.
