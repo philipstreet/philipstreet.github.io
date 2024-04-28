@@ -117,7 +117,7 @@ export STARSHIP_CONFIG=/mnt/c/Users/?/.config/starship/starship.toml
 eval "$(starship init bash)"
 {% endhighlight %}
 
-Replace "?" with the relevant Windows "username" so that the path is relevant from WSL. This means that both your Windows Terminal AND WSL instance will use the same Starship configuration file, ensuring consistency across both platforms!
+Replace "?" with the relevant Windows "username" so that the path is valid from WSL. This means that both your Windows Terminal AND WSL instance will use the same Starship configuration file, ensuring consistency across both platforms!
 
 ## Wrap Up
 
