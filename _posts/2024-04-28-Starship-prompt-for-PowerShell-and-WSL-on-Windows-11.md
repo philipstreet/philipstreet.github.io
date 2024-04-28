@@ -127,4 +127,4 @@ When you open a PowerShell or WSL prompt, either from Windows Terminal or Visual
 
 ## Conclusion
 
-As always, if you think there is a better way this could've been fixed then please leave a comment below.
+I hope this will be of help to you. Let me know if you have any suggestions for improvements in the comments.
