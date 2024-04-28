@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Startship prompt for PowerShell & WSL on Windows 11
+title: Starship prompt for PowerShell & WSL on Windows 11
 ---
 "One Prompt to config them all,<br>
 One Prompt to style them,<br>
