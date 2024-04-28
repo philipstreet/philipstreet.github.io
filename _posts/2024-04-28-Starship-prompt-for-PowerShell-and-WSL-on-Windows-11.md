@@ -2,13 +2,12 @@
 layout: post
 title: Startship prompt for PowerShell & WSL on Windows 11
 ---
+"One Prompt to config them all,<br>
+One Prompt to style them,<br>
+One Prompt to display in all<br>
+and in the Shell bind them."<br>
 
-"One Prompt to config them all,
-One Prompt to style them,
-One Prompt to display in all
-and in the Shell bind them."
-
-- J. R. R. Tolkien....maybe.
+by J. R. R. Tolkien....maybe.
 
 ## Introduction
 
@@ -99,7 +98,7 @@ You need to create a configuration file for Starship, which is the "starship.tom
 To install Starship on your WSL instance, run the following Bash script;
 
 {% highlight bash %}
-curl -sS <https://starship.rs/install.sh> | sh
+curl -sS [https://starship.rs/install.sh](https://starship.rs/install.sh) | sh
 {% endhighlight %}
 
 Then add the following to your .bashrc file;
