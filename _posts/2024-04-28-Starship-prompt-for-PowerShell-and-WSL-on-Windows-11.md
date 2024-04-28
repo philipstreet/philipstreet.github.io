@@ -2,10 +2,10 @@
 layout: post
 title: Starship prompt for PowerShell & WSL on Windows 11
 ---
-"One Prompt to config them all,<br>
-One Prompt to style them,<br>
-One Prompt to display in all<br>
-and in the Shell bind them."<br>
+"One Prompt to config them all,  
+One Prompt to style them,  
+One Prompt to display in all  
+and in the Shell bind them."  
 
 by J. R. R. Tolkien....maybe.
 
