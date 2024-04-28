@@ -6,7 +6,7 @@ If the title of this article isn't long enough then the rest of the blog post wi
 
 I recently worked with a customer that wanted to deploy a conventional DMZ environment in Azure using Azure Application Gateways and Azure Firewall, leveraging the various security features of Azure Firewall Premium SKU but specifically TLS Inspection for in-bound HTTP(S) traffic.
 
-This article describes my challenges with configuring TLS Inspection in an Enterprise environment.
+This article describes my challenges with configuring TLS Inspection in an enterprise environment.
 
 ## Architecture
 
@@ -20,7 +20,7 @@ When looking at the end-to-end TLS connection between the user and the backend s
 - The Azure Application Gateway creates a new TLS connection to the "backend" via the Azure Firewall. Termination of the TLS connection on the Azure Firewall allows it to perform TLS Inspection.
 - The Azure Firewall creates a new TLS connection to the backend service.
 
-To facilitate this, the Azure Application Gateway and Azure Firewall have to establish a trusted TLS connection, where the Azure Firewall
+To facilitate this, the Azure Application Gateway and Azure Firewall have to establish a trusted TLS connection. To decrypt and inspect TLS traffic, Azure Firewall Premium dynamically generates certificates and presents itself to the Application Gateway as the web server. An Intermediate CA certificate signs the certificates that Azure Firewall Premium generates.
 
 The certificate used by Azure Firewall for TLS Inspection has [very specific requirements](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#intermediate-ca-certificate-requirements).
 
@@ -29,7 +29,7 @@ The certificate used by Azure Firewall for TLS Inspection has [very specific req
 There are 3 options when configuring a certificate for TLS Inspection, according to the official Microsoft documentation [Azure Firewall Premium Certificates](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#configure-a-certificate-in-your-policy):
 
 1. Create your own self-signed certificate
-2. Use your corporate PKI to create an Intermediate CA certificate
+2. Use your enterprise PKI to create an Intermediate CA certificate
 3. Certificate auto-generation (via the Azure Portal)
 
 I'll go through each option, discuss some Pros and Cons, identify some limitations, and talk about some of the issues I encountered.
@@ -65,9 +65,9 @@ Issues:
 
 - Neither the [azurerm_key_vault_certificate](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_certificate), [self_signed_cert](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/self_signed_cert) or [locally_signed_cert](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/locally_signed_cert) resources support creating the required intermediate CA certificate
 
-### Option 2 - Use your corporate PKI to create an Intermediate CA certificate
+### Option 2 - Use your enterprise PKI to create an Intermediate CA certificate
 
-For Production environments, Microsoft recommends [deploying a certificate issued from your corporate PKI](https://learn.microsoft.com/en-us/azure/firewall/premium-deploy-certificates-enterprise-ca). That is fine, so long as it complies with [Microsoft's certificate requirements](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#intermediate-ca-certificate-requirements) and your corporate security standards.
+For Production environments, Microsoft recommends [deploying a certificate issued from your enterprise PKI](https://learn.microsoft.com/en-us/azure/firewall/premium-deploy-certificates-enterprise-ca). That is fine, so long as it complies with [Microsoft's certificate requirements](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#intermediate-ca-certificate-requirements) and your enterprise security standards.
 
 The latter was an issue for the customer I was working with because they DO NOT issue Intermediate CA certificates directly from their roor CA. In fact, this was the certificate chain that was initially issued to the DMZ Azure Firewall;
 
@@ -84,11 +84,11 @@ PROS:
 
 CONS:
 
-- Only works if your corporate security standards permit the issuing Intermediate CA certificates directly from your root CA
+- Only works if your enterprise security standards permit the issuing Intermediate CA certificates directly from your root CA
 
 Issues:
 
-- You can only use your corporate PKI if the Intermediate CA certificate is issued directly from your root CA, or you use the root CA.
+- You can only use your enterprise PKI if the Intermediate CA certificate is issued directly from your root CA, or you use the root CA.
 
 ### Option 3 - Certificate auto-generation
 
@@ -105,8 +105,8 @@ PROS:
 
 CONS:
 
-- Resources are created with names that may not comply with your corporate resource naming standard
-- Resources are created with configuration that may not comply with your corporate configuration and security standards
+- Resources are created with names that may not comply with your enterprise resource naming standard
+- Resources are created with configuration that may not comply with your enterprise configuration and security standards
 - Certificate cannot be exported for re-use elsewhere
 
 Issues:
@@ -119,7 +119,7 @@ Unfortunately, I don't have a recommended one-size-fits all solution to this. Al
 
 My guidance is that you generate the Intermediate CA certificate using one of the following techniques, in order of preference:
 
-1. Use your corporate PKI if:
+1. Use your enterprise PKI if:
    1. It conforms to your enterprise security standards, and
    2. The resulting certificate adheres to [Microsoft's certificate requirements](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#intermediate-ca-certificate-requirements).
 2. Use Microsoft's config & script(s) for [creating a self-signed sertificate](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#create-your-own-self-signed-ca-certificate) if:
