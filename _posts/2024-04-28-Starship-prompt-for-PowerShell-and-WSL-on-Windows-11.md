@@ -35,7 +35,7 @@ After trying to follow Matt's instructions I discovered that not everything was 
 
 ## Sold! How do I get this setup?
 
-Before you run headlong into trying to install Starship, you need to install a few dependencies first. As I said before, I couldn't install Starship using Winget or Chocolatey as I did not have the permissions to start Windows Terminal with elevated privileges. After a bit of sluething, I discovered an alternative package manager called [Scoop](https://scoop.sh), which allowed me to install Starship without elevated privileges.
+Before you run headlong into trying to install Starship, you need to install a few dependencies first. As I said before, I couldn't install Starship using Winget or Chocolatey as I did not have the permissions to start Windows Terminal with elevated privileges. After a bit of sluething, I discovered an alternative package manager called [Scoop](https://scoop.sh), which allowed me to install Starship without elevated privileges, as well as other helpful tools.
 
 ### Step 1: Install Scoop in Windows
 
