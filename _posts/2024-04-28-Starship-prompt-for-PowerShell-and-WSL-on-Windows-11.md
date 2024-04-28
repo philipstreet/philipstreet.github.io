@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Startship prompt and other Windows 11 development machine configurations
+title: Startship prompt for PowerShell & WSL on Windows 11
 ---
 
 "One Prompt to config them all,
