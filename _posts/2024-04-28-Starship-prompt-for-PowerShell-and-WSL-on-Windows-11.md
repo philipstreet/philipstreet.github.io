@@ -27,7 +27,7 @@ Briefly, the above images are showing (from left to right);
 
 __*WARNING!*__ This article is written for Windows 11 users. Those on macOS or Linux may not have these issues and will need to follow slightly different instructions.
 
-After trying to follow Matt's instructions I discovered that not everything was going to work on my work laptop because I don't have the permissions to start / run a prompt with elevated privileges. Also, some of the tasks required to get Starship setup can be done in several different ways, some easy easier than others. So I thought it might be useful to document my findings here for the benefit of others.
+After trying to follow Matt's instructions I discovered that not everything was going to work on my work laptop because I don't have the permissions to start / run a prompt with elevated privileges. Also, some of the tasks required to get Starship setup can be done in several different ways, some easier than others. So I thought it might be useful to document my findings here for the benefit of others.
 
 ## What's Starship?
 
