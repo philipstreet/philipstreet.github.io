@@ -49,6 +49,7 @@ First of all, I tried using the [azurerm_key_vault_certificate](https://registry
 Yes and no... The [self_signed_cert](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/self_signed_cert) and [locally_signed_cert](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/locally_signed_cert) resources do have a *is_ca_certificate* property, BUT they do not also support the required *pathlength* property. In fact, there is an outstanding, and slightly confusing, enhancement request to [add max_path_length in tls_locally_signed_cert](https://github.com/hashicorp/terraform-provider-tls/issues/296) to Hashicorp's TLS provider.
 
 **Summary:**
+
 PROs:
 
 - Good for Dev/Test environments
@@ -95,7 +96,7 @@ The Azure Portal allows you to [auto-generate](https://learn.microsoft.com/en-us
 
 The obvious drawbacks of this are that a "vanilla" resources are created, without any of the standard operational and security configuration that your organisation may normally apply when deploying these resources, such as naming convention, Service / Private Endpoints, Certificate Contacts, Diagnostic Settings etc.
 
-Summary:
+**Summary:**
 
 PROS:
 
