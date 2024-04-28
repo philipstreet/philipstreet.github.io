@@ -11,12 +11,12 @@ by J. R. R. Tolkien....maybe.
 
 ## Introduction
 
-I recently watched [Starship! One prompt to rule them all](https://www.youtube.com/watch?v=wXK4RGrBLuM&t=7s) and loved the idea of having a consistent look and feel across all the prompts that I use on my Windows 11 machines, whether that be PowerShell or WSL Ubuntu in either Windows Terminal or Visual Studio Code. Such as;
+I recently watched [Starship! One prompt to rule them all](https://www.youtube.com/watch?v=wXK4RGrBLuM&t=7s) by [Matt Field](https://www.youtube.com/@matt-ffffff) and loved the idea of having a consistent look and feel across all the prompts that I use on my Windows 11 machines, whether that be PowerShell or WSL Ubuntu in either Windows Terminal or Visual Studio Code. Such as;
 
 ![Windows Terminal](/images/2024-04-28-windows-terminal.png)
 ![WSL Ubuntu](/images/2024-04-28-wsl-ubuntu.png)
 
-Obviously, the article is written for Windows 11 users. Those on macOS or Linux may not have these issues and will need to follow slightly different instructions.
+__*WARNING!*__ This article is written for Windows 11 users. Those on macOS or Linux may not have these issues and will need to follow slightly different instructions.
 
 After trying to follow Matt's instructions I discovered that not everything was going to work on my work laptop because I don't have the permissions to start / run a prompt with elevated privileges. Also, some of the tasks required to get Starship setup can be done in several different ways, some easy easier than others. So I thought it might be useful to document my findings here for the benefit of others.
 
