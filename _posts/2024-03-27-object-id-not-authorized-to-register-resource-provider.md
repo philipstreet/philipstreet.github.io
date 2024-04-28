@@ -59,4 +59,4 @@ I hope this helps someone that experiences the same issue.
 
 As always, if you think there is a better way this could've been fixed then please leave a comment below.
 
-[top](#title)
+[top](#top)
