@@ -33,9 +33,13 @@ After trying to follow Matt's instructions I discovered that not everything was 
 
 "What's Starhip?", I hear you ask. [Starship](https://starship.rs) is a cross-platform cross-shell prompt written in Rust, so is blazingly fast. It allows you to customise and augment the prompt with additional information that you may find useful.
 
+[top](#title)
+
 ## Sold! How do I get this setup?
 
 Before you run headlong into trying to install Starship, you need to install a few dependencies first. As I said before, I couldn't install Starship using Winget or Chocolatey as I did not have the permissions to start Windows Terminal with elevated privileges. After a bit of sluething, I discovered an alternative package manager called [Scoop](https://scoop.sh), which allowed me to install Starship without elevated privileges, as well as other helpful tools.
+
+[top](#title)
 
 ### Step 1: Install Scoop in Windows
 
@@ -45,6 +49,8 @@ The first step is to install Scoop, which is as simple as opening Windows Termin
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Invoke-RestMethod -Uri [https://get.scoop.sh](https://get.scoop.sh) | Invoke-Expression
 {% endhighlight %}
+
+[top](#title)
 
 ### Step 2: Install a Nerd Font
 
@@ -70,13 +76,19 @@ nfdl
 
 Select your desired Nerd Font from the menu and let the cli handle the rest. By default, fonts will be downloaded and installed in the .fonts directory in your home directory.
 
+[top](#title)
+
 ### Step 3: Configure Windows Terminal to use the downloaded Nerd Font
 
 By default Windows Terminal uses a standard font, so you need to tell it to use the new Nerd Font. Open Windows Terminal > Settings, and select Profile Defaults > Appearance, and select your Nerd Font from the the Font face dropdown list. For me that meant selecting "CaskaydiaCode NF". If you don't want to apply the font to all profiles then select each profile to set the Font face.
 
+[top](#title)
+
 ### Step 4: Configure Visual Studio Code to use the downloaded Nerd Font
 
 By default Visual Studio Code uses a standard font, so you need to tell it to use the new Nerd Font. Open Visual Studio Code > Preferences > Settings, then Text Editor > Font and type the name of your Nerd Font and click Save. For me that meant entering "CaskaydiaCove NF".
+
+[top](#title)
 
 ### Step 5: Install Starship on Windows
 
@@ -102,6 +114,8 @@ Invoke-Expression (&starship init powershell)
 
 You need to create a configuration file for Starship, which is the "starship.toml" path in the above code. Follow the [instructions](https://starship.rs/config/), or you can download and use [my configuration from my GitHub repo](https://github.com/philipstreet/dev-machine-config/blob/main/starship/starship.toml). Ensure the path to your starship.toml file matches the one you configure in your STARTSHIP_CONFIG environment variable.
 
+[top](#title)
+
 ### Step 6: Install Starship in your WSL instance
 
 To install Starship on your WSL instance, run the following Bash script;
@@ -119,16 +133,18 @@ eval "$(starship init bash)"
 
 Replace "?" with the relevant Windows "username" so that the path is relevant from WSL. This means that both your Windows Terminal AND WSL instance will use the same Starship configuration file, ensuring consistency across both platforms!
 
+[top](#title)
+
 ## Wrap Up
 
 All of the above code & config snippets are available on my [dev-machine-configuration](https://github.com/philipstreet/dev-machine-config/tree/main) GitHub repo.
 
 When you open a PowerShell or WSL prompt, either from Windows Terminal or Visual Studio Code, you should now have a consistent user experience! Enjoy!
 
-## Conclusion
+[top](#title)
 
-I hope this helps someone that experiences the same issue.
+## Conclusion
 
 As always, if you think there is a better way this could've been fixed then please leave a comment below.
 
-[top](#whats-starship)
+[top](#title)
