@@ -71,7 +71,7 @@ For Production environments, Microsoft recommends [deploying a certificate issue
 
 The latter was an issue for the customer I was working with because they DO NOT issue Intermediate CA certificates directly from their roor CA. In fact, this was the certificate chain that was initially issued to the DMZ Azure Firewall;
 
-(TODO Image of 4-level certificate  chain)
+[Certificate Chain](/images/2024-03-26-cert-chain.png)
 
 Initial suggestions by Microsoft Support were to bundle the certificate chain to uploaded to the Application Gateway, but this did not work. They later confirmed with the Azure Firewall and Application Gateway product teams that you can only upload a single certificate, meaning the certificate chain has to be no more than one level, i.e. a single root CA certificate or a root & intermediate CA certificate.
 
