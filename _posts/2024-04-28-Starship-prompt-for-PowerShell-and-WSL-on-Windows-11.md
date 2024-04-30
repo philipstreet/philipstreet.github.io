@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Starship prompt for PowerShell & WSL on Windows 11
+tags: Windows, Shell, Prompt, Starship
+image: 2024-04-28-starship-extract.png
 ---
 "One Prompt to config them all,  
 One Prompt to style them,  
