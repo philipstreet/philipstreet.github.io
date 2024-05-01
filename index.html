@@ -1,6 +1,9 @@
 ---
 layout: default
 ---
+{% assign row_is_odd = true %}
+{% assign text_float = "left" %}
+{% assign image_float = "right" %}
 
 <div class="posts">
   {% for post in site.posts %}
@@ -9,7 +12,7 @@ layout: default
       <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
 
       <div class="entry">
-        <div>{{ post.excerpt }}</div><div style="float: right;"><img src="/images/{{ post.image }}" style="width: 300px;"> </div>
+        <div stlye="float: {{text_float}}">{{ post.excerpt }}</div><div style="float: {{image_float}};"><img src="/images/{{ post.image }}" style="width: 300px;"> </div>
       </div>
       <div class="date">
         Written on {{ post.date | date: "%B %e, %Y" }}
@@ -17,5 +20,15 @@ layout: default
 
       <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
     </article>
+    {% if row_is_odd == true %}
+      {% text_float = "right" %}
+      {% text_float = "left" %}
+      {% row_is_odd = false %}
+    {% else %}
+      {% text_float = "left" %}
+      {% text_float = "right" %}
+      {% row_is_odd = true %}
+    {% endif %}
+
   {% endfor %}
 </div>
