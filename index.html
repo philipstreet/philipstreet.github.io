@@ -9,7 +9,7 @@ layout: default
       <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
 
       <div class="entry">
-        <span stlye="">{{ post.excerpt }}</span><span style="float: right; vertical-align: top;"><img src="/images/{{ post.image }}" style="width: 300px;"> </span>
+        <div>{{ post.excerpt }}</div><div style="float: right; vertical-align: top; width: 300px;"><img alt="Small image from post" src="/images/{{ post.image }}"></div>
       </div>
       <div class="date">
         Written on {{ post.date | date: "%B %e, %Y" }}
