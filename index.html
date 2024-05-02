@@ -1,9 +1,6 @@
 ---
 layout: default
 ---
-{% assign row_is_odd = true %}
-{% assign text_float = "left" %}
-{% assign image_float = "right" %}
 
 <div class="posts">
   {% for post in site.posts %}
@@ -20,15 +17,5 @@ layout: default
 
       <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
     </article>
-    {% if row_is_odd == true %}
-      {% text_float = "right" %}
-      {% text_float = "left" %}
-      {% row_is_odd = false %}
-    {% else %}
-      {% text_float = "left" %}
-      {% text_float = "right" %}
-      {% row_is_odd = true %}
-    {% endif %}
-
   {% endfor %}
 </div>
