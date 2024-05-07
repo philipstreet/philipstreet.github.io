@@ -40,7 +40,7 @@ I'll go through each option, discuss some Pros and Cons, identify some limitatio
 
 For Dev/Test environments, Microsoft suggest [creating a self-signed sertificate](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#create-your-own-self-signed-ca-certificate) using OpenSSL and their provided config file with either the Bash or PowerShell script to generate root CA and intermediate CA certificates that you can then use on the Azure Application Gateway and AzureFirewall resources (respectively).
 
-#### OpenSSL command-line?! What about Terraform?
+**OpenSSL command-line?! What about Terraform?**
 
 I'm glad you asked, because I spent a fair amount of time on this.
 
