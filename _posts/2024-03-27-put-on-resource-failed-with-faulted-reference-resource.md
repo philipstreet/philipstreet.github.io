@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Put on [Resource Type] [Resource Name] Failed with 1 faulted referenced [Resource Type](s)
+image: 2024-05-07-chained-resources.png
 ---
 
 This error can occur when you're trying to deploy a change to an Azure network resource, but its provisioning state, or one of its dependencies, is "Failed".
