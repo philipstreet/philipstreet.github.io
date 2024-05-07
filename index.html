@@ -7,7 +7,7 @@ layout: default
     <article class="post">
       {% assign row = forloop.index | modulo: 2  %}
       {% if row == 1 %}
-        {% assign float = "right" %}}
+        {% assign float = "right" %}
       {% else %}
         {% assign float = "left" %}
       {% endif %}
@@ -15,7 +15,7 @@ layout: default
 
       <div class="entry">
         <div>
-          <img alt="Small image from post" src="/images/{{ post.image }}" style="width: 400px; float: right;">
+          <img alt="Small image from post" src="/images/{{ post.image }}" style="width: 400px; float: {{ float }};">
           {{ post.excerpt }}
         </div>
       </div>
