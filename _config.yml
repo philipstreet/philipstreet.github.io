@@ -76,6 +76,7 @@ sass:
 plugins:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
+  - jekyll-tagging # Add a tag cloud and per tag pages plus feeds
 
 # Exclude these files from your production _site
 exclude:
@@ -84,3 +85,8 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+
+# The following configuration is used by the tag cloud and tag pages
+tag_page_layout: tag_page
+tag_page_dir: tag
+tag_permalink_style: pretty

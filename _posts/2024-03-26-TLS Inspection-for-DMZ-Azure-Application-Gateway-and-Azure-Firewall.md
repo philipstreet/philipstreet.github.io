@@ -1,7 +1,7 @@
 ---
 layout: post
 title: TLS Inspection for DMZ Azure Application Gateway & Azure Firewall - certificate options, issues and limitations
-tags: Azure, Azure Firewall, Application Gateway, certificates, TLS Inspection
+tags: azure azure-firewall application-gateway certificates tls-inspection
 image: 2024-03-26-cert-chain.png
 ---
 If the title of this article isn't long enough then the rest of the blog post will make up for it, because there's a lot to cover.

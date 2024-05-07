@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Put on [Resource Type] [Resource Name] Failed with 1 faulted referenced [Resource Type](s)
+tags: azure troubleshooting
 image: 2024-05-07-chained-resources.png
 ---
 

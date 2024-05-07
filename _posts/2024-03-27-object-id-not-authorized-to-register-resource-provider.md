@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Object ID is not authorized to register Azure resource provider
-tags: Terraform, Azure, Subscription Resource Provider
+tags: azure terraform troubleshooting
 image: 2024-03-27-object-id-not-authorized-to-register-resource-provider-pipeline.png
 ---
 
