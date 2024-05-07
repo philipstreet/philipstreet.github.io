@@ -4,7 +4,7 @@ title: Put on [Resource Type] [Resource Name] Failed with 1 faulted referenced [
 image: 2024-05-07-chained-resources.png
 ---
 
-This error can occur when you're trying to deploy a change to an Azure network resource, but its provisioning state, or one of its dependencies, is "Failed".
+This error can occur when you're trying to deploy a change to an Azure network resource, but its provisioning state, or one of its dependencies, is "Failed". Should I start panicking now? Why does this happen? And how do I fix it?
 
 This is Part 1 of a series of posts regarding this issue.
 
@@ -20,7 +20,7 @@ OK, panic over, but...
 
 There are different reasons why this can occur that seem to vary depending on the resource type, whether it be an IP Group, Azure Firewall Policy, Azure Firewall etc.
 
-For Azure Firewall, I recently found this can occur if you attempt to push changes to IP Groups in parallel. This is known issue, which can be found [Azure Firewall known issues and limitations](https://learn.microsoft.com/en-us/azure/firewall/firewall-known-issues). Fortunately, there is a feature that is currently in preview to support [parallel IP Group updates](https://learn.microsoft.com/en-us/azure/firewall/ip-groups#parallel-ip-group-updates-preview), although I'm not sure how a CI/CD will know to limit parallel updates to a specific number.
+For Azure Firewall, I recently found this can occur if you attempt to push changes to IP Groups in parallel. This is a known issue, which can be found [Azure Firewall known issues and limitations](https://learn.microsoft.com/en-us/azure/firewall/firewall-known-issues). Fortunately, there is a feature that is currently in preview to support [parallel IP Group updates](https://learn.microsoft.com/en-us/azure/firewall/ip-groups#parallel-ip-group-updates-preview), although I'm not sure how a CI/CD will know to limit parallel updates to a specific number.
 
 ## So, how do I fix it?
 
