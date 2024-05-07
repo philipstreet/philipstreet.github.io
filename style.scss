@@ -288,6 +288,8 @@ img.centered {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
