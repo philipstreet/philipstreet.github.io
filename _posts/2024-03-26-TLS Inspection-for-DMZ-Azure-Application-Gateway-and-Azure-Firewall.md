@@ -14,7 +14,7 @@ This article specifically describes my challenges with configuring TLS Inspectio
 
 We'll be using a specific architectural scenario, which is the [Zero-trust network for web applications with Azure Firewall and Application Gateway](https://learn.microsoft.com/en-us/azure/architecture/example-scenario/gateway/application-gateway-before-azure-firewall), where the Azure Application Gateway sits in front of the Azure Firewall. The HTTP(S) traffic passes through those devices before getting to the backend services (API Management, App Service etc).
 
-![Architecture diagram showing the packet flow in a web app network that uses Application Gateway in front of Azure Firewall Premium.](/images/2024-03-26-TLS-Inspection.png){:.centered}
+![Architecture diagram showing the packet flow in a web app network that uses Application Gateway in front of Azure Firewall Premium.](/images/2024-03-26-TLS-Inspection.png)
 
 When looking at the end-to-end TLS connection between the user and the backend service, the following occurs:
 
@@ -75,7 +75,7 @@ For Production environments, Microsoft recommends [deploying a certificate issue
 
 The latter was an issue for the customer I was working with because they DO NOT issue Intermediate CA certificates directly from their root CA. In fact, this was the certificate chain that was initially issued to the DMZ Azure Firewall;
 
-![Certificate Chain](/images/2024-03-26-cert-chain.png){:.centered}
+![Certificate Chain](/images/2024-03-26-cert-chain.png)
 
 Initial suggestions by Microsoft Support were to bundle the certificate chain to uploaded to the Application Gateway, but this did not work. They later confirmed with the Azure Firewall and Application Gateway product teams that you can only upload a single certificate, meaning the certificate chain has to be no more than one level, i.e. a single root CA certificate or a root & intermediate CA certificate.
 
