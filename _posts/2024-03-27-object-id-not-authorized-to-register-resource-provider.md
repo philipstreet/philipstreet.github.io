@@ -31,7 +31,7 @@ BUT....
 
 The Service Principal being used by the Service Connection had the correct RBAC permissions on both Subscriptions, i.e. Contributor, which should be enough to register a missing Resource Provider.
 
-![alt text](/images/2024-03-27-object-id-not-authorized-to-register-resource-provider-mslearn.png)
+![alt text](/images/2024-03-27-object-id-not-authorized-to-register-resource-provider-mslearn.png){:.centered}
 
 You must have permission to do the /register/action operation for the resource provider. The permission is included in the Contributor and Owner roles.
 

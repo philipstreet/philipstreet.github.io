@@ -15,8 +15,8 @@ by J. R. R. Tolkien....maybe.
 
 I recently watched [Starship! One prompt to rule them all](https://www.youtube.com/watch?v=wXK4RGrBLuM&t=7s) by [Matt Field](https://www.youtube.com/@matt-ffffff) and loved the idea of having a consistent look and feel across all the prompts that I use on my Windows 11 machines, whether that be PowerShell or WSL Ubuntu in either Windows Terminal or Visual Studio Code. Such as;
 
-![Windows Terminal](/images/2024-04-28-windows-terminal.png)
-![WSL Ubuntu](/images/2024-04-28-wsl-ubuntu.png)
+![Windows Terminal](/images/2024-04-28-windows-terminal.png){:.centered}
+![WSL Ubuntu](/images/2024-04-28-wsl-ubuntu.png){:.centered}
 
 Briefly, the above images are showing (from left to right);
 
