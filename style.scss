@@ -292,6 +292,12 @@ img.centered {
   margin-bottom: 25px;
 }
 
+img.extract {
+  max-width: 350px;
+  max-height: 200px;
+  margin: 0px 25px 0px 25px;
+}
+
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
