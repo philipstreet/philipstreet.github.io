@@ -6,13 +6,13 @@ image: 2024-05-08-starship-command-prompt-extract.png
 ---
 In a follow-up to my previous post [Starship prompt for PowerShell & WSL on Windows 11](https://blog.philipstreet.co.uk/Starship-prompt-for-PowerShell-and-WSL-on-Windows-11/){:target="_blank"}, I'll show how to configure Starship for the good old native Windows shell cmd.exe.
 
+These instructions assume you have already configured Starship as per my previous blog post. If not, follow those instructions first before proceeding.
+
 ## Can I really customise the humble Windows shell cmd.exe?
 
 Yes you can! Here's mine, which looks almost exactly like my PowerShell and WSL instance;
 
 ![Command Prompt](/images/2024-05-08-starship-command-prompt.png)
-
-These instructions assume you have already configured Starship as per my previous blog post. If not, follow those instructions first before proceeding.
 
 ### Step 1: Install Clink using Scoop
 
