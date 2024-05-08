@@ -12,7 +12,7 @@ Yes you can! Here's mine, which looks almost exactly like my PowerShell and WSL 
 
 ![Command Prompt](/images/2024-05-08-starship-command-prompt.png)
 
-To hook Starship into the Command Prompt is achieved using tool called [Clink](https://chrisant996.github.io/clink/clink.html){:target="_blank"}.
+Customising the Command Prompt using Starship is achieved using a tool called [Clink](https://chrisant996.github.io/clink/clink.html){:target="_blank"}.
 
 ### Step 1: Install Clink using Scoop
 
