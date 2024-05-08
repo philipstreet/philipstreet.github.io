@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Starship prompt for PowerShell & WSL on Windows 11
+title: Starship for PowerShell & WSL on Windows 11
 tags: windows shell prompt starship
 image: 2024-04-28-starship-extract.png
 ---

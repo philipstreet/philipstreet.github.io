@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Starship prompt for Command Prompt on Windows 11
+title: Starship for Command Prompt on Windows 11
 tags: windows shell prompt starship command-prompt
 image: 2024-05-08-starship-command-prompt-extract.png
 ---
