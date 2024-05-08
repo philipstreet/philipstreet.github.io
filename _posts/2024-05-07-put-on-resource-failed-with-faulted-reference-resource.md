@@ -11,7 +11,7 @@ This is Part 1 of a series of posts regarding this issue.
 
 ## The provisioning state is "Failed"! Should I be worried?
 
-As explained in [Troubleshoot Azure Microsoft.Network failed provisioning state](https://learn.microsoft.com/en-us/azure/networking/troubleshoot-failed-state);
+As explained in [Troubleshoot Azure Microsoft.Network failed provisioning state](https://learn.microsoft.com/en-us/azure/networking/troubleshoot-failed-state){:target="_blank"};
 
 >These states are metadata properties of the resource. They're independent from the functionality of the resource itself. Being in the failed state doesn't necessarily mean that the resource isn't functional. In most cases, it can continue operating and serving traffic without issues.
 
@@ -21,15 +21,15 @@ OK, panic over, but...
 
 There are different reasons why this can occur that seem to vary depending on the resource type, whether it be an IP Group, Azure Firewall Policy, Azure Firewall etc.
 
-For Azure Firewall, I recently found this can occur if you attempt to push changes to IP Groups in parallel. This is a known issue, which can be found [Azure Firewall known issues and limitations](https://learn.microsoft.com/en-us/azure/firewall/firewall-known-issues). Fortunately, there is a feature that is currently in preview to support [parallel IP Group updates](https://learn.microsoft.com/en-us/azure/firewall/ip-groups#parallel-ip-group-updates-preview), although I'm not sure how a CI/CD will know to limit parallel updates to a specific number.
+For Azure Firewall, I recently found this can occur if you attempt to push changes to IP Groups in parallel. This is a known issue, which can be found [Azure Firewall known issues and limitations](https://learn.microsoft.com/en-us/azure/firewall/firewall-known-issues){:target="_blank"}. Fortunately, there is a feature that is currently in preview to support [parallel IP Group updates](https://learn.microsoft.com/en-us/azure/firewall/ip-groups#parallel-ip-group-updates-preview){:target="_blank"}, although I'm not sure how a CI/CD will know to limit parallel updates to a specific number.
 
 ## So, how do I fix it?
 
-For resources in a Failed provisioning state, you can [Restore succeeded state through a PUT operation](https://learn.microsoft.com/en-us/azure/networking/troubleshoot-failed-state#restoring-succeeded-state-through-a-put-operation).
+For resources in a Failed provisioning state, you can [Restore succeeded state through a PUT operation](https://learn.microsoft.com/en-us/azure/networking/troubleshoot-failed-state#restoring-succeeded-state-through-a-put-operation){:target="_blank"}.
 
 The easiest way to achieve this task is to use Azure PowerShell. Issue a resource-specific Get command that fetches all the current configuration for the resource. Next, run a Set command, or equivalent, to commit to Azure a write operation that contains all the resource properties as currently configured.
 
-You can find a list of [Azure PowerShell cmdlets to restore succeeded provisioning state](https://learn.microsoft.com/en-us/azure/networking/troubleshoot-failed-state#azure-powershell-cmdlets-to-restore-succeeded-provisioning-state).
+You can find a list of [Azure PowerShell cmdlets to restore succeeded provisioning state](https://learn.microsoft.com/en-us/azure/networking/troubleshoot-failed-state#azure-powershell-cmdlets-to-restore-succeeded-provisioning-state){:target="_blank"}.
 
 ## Didn't you say something about dependencies?
 

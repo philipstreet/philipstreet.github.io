@@ -13,7 +13,7 @@ by J. R. R. Tolkien....maybe.
 
 ## Introduction
 
-I recently watched [Starship! One prompt to rule them all](https://www.youtube.com/watch?v=wXK4RGrBLuM&t=7s) by [Matt Field](https://www.youtube.com/@matt-ffffff) and loved the idea of having a consistent look and feel across all the prompts that I use on my Windows 11 machines, whether that be PowerShell or WSL Ubuntu in either Windows Terminal or Visual Studio Code. Such as;
+I recently watched [Starship! One prompt to rule them all](https://www.youtube.com/watch?v=wXK4RGrBLuM&t=7s){:target="_blank"} by [Matt Field](https://www.youtube.com/@matt-ffffff){:target="_blank"} and loved the idea of having a consistent look and feel across all the prompts that I use on my Windows 11 machines, whether that be PowerShell or WSL Ubuntu in either Windows Terminal or Visual Studio Code. Such as;
 
 ![Windows Terminal](/images/2024-04-28-windows-terminal.png){:.centered}
 ![WSL Ubuntu](/images/2024-04-28-wsl-ubuntu.png){:.centered}
@@ -33,11 +33,11 @@ After trying to follow Matt's instructions I discovered that not everything was 
 
 ## What's Starship?
 
-"What's Starhip?", I hear you ask. [Starship](https://starship.rs) is a cross-platform cross-shell prompt written in Rust, so is blazingly fast. It allows you to customise and augment the prompt with additional information that you may find useful.
+"What's Starhip?", I hear you ask. [Starship](https://starship.rs){:target="_blank"} is a cross-platform cross-shell prompt written in Rust, so is blazingly fast. It allows you to customise and augment the prompt with additional information that you may find useful.
 
 ## Sold! How do I get this setup?
 
-Before you run headlong into trying to install Starship, you need to install a few dependencies first. As I said before, I couldn't install Starship using Winget or Chocolatey as I did not have the permissions to start Windows Terminal with elevated privileges. After a bit of sluething, I discovered an alternative package manager called [Scoop](https://scoop.sh), which allowed me to install Starship without elevated privileges, as well as other helpful tools.
+Before you run headlong into trying to install Starship, you need to install a few dependencies first. As I said before, I couldn't install Starship using Winget or Chocolatey as I did not have the permissions to start Windows Terminal with elevated privileges. After a bit of sluething, I discovered an alternative package manager called [Scoop](https://scoop.sh){:target="_blank"}, which allowed me to install Starship without elevated privileges, as well as other helpful tools.
 
 ### Step 1: Install Scoop in Windows
 
@@ -45,7 +45,7 @@ The first step is to install Scoop, which is as simple as opening Windows Termin
 
 {% highlight powershell %}
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-Invoke-RestMethod -Uri [https://get.scoop.sh](https://get.scoop.sh) | Invoke-Expression
+Invoke-RestMethod -Uri [https://get.scoop.sh](https://get.scoop.sh){:target="_blank"} | Invoke-Expression
 {% endhighlight %}
 
 ### Step 2: Install a Nerd Font
@@ -57,7 +57,7 @@ scoop bucket add nerd-fonts
 scoop install nerd-fonts/CascadiaCode-NF
 {% endhighlight %}
 
-I also needed to install it in my WSL Ubuntu instance as well. This can be done using a tool called *NFDL* ([Nerd Fonts Downloader](https://github.com/rubiin/nfdl)), which is a small NodeJS app. So, first install NodeJS and NPM - if you don't have them already - and then NFDL;
+I also needed to install it in my WSL Ubuntu instance as well. This can be done using a tool called *NFDL* ([Nerd Fonts Downloader](https://github.com/rubiin/nfdl){:target="_blank"}), which is a small NodeJS app. So, first install NodeJS and NPM - if you don't have them already - and then NFDL;
 
 {% highlight bash %}
 sudo apt-get install -y nodejs npm
@@ -102,14 +102,14 @@ $ENV:STARSHIP_CONFIG = "$HOME\.config\starship\starship.toml"
 Invoke-Expression (&starship init powershell)
 {% endhighlight %}
 
-You need to create a configuration file for Starship, which is the "starship.toml" path in the above code. Follow the [instructions](https://starship.rs/config/), or you can download and use [my configuration from my GitHub repo](https://github.com/philipstreet/dev-machine-config/blob/main/starship/starship.toml). Ensure the path to your starship.toml file matches the one you configure in your STARTSHIP_CONFIG environment variable.
+You need to create a configuration file for Starship, which is the "starship.toml" path in the above code. Follow the [instructions](https://starship.rs/config/){:target="_blank"}, or you can download and use [my configuration from my GitHub repo](https://github.com/philipstreet/dev-machine-config/blob/main/starship/starship.toml){:target="_blank"}. Ensure the path to your starship.toml file matches the one you configure in your STARTSHIP_CONFIG environment variable.
 
 ### Step 6: Install Starship in your WSL instance
 
 To install Starship on your WSL instance, run the following Bash script;
 
 {% highlight bash %}
-curl -sS [https://starship.rs/install.sh](https://starship.rs/install.sh) | sh
+curl -sS https://starship.rs/install.sh | sh
 {% endhighlight %}
 
 Then add the following to your .bashrc file;
@@ -123,7 +123,7 @@ Replace "?" with the relevant Windows "username" so that the path is valid from 
 
 ## Wrap Up
 
-All of the above code & config snippets are available on my [dev-machine-configuration](https://github.com/philipstreet/dev-machine-config/tree/main) GitHub repo.
+All of the above code & config snippets are available on my [dev-machine-configuration](https://github.com/philipstreet/dev-machine-config/tree/main){:target="_blank"} GitHub repo.
 
 When you open a PowerShell or WSL prompt, either from Windows Terminal or Visual Studio Code, you should now have a consistent user experience! Enjoy!
 

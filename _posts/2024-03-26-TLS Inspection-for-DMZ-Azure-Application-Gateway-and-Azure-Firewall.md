@@ -12,7 +12,7 @@ This article specifically describes my challenges with configuring TLS Inspectio
 
 ## Architecture
 
-We'll be using a specific architectural scenario, which is the [Zero-trust network for web applications with Azure Firewall and Application Gateway](https://learn.microsoft.com/en-us/azure/architecture/example-scenario/gateway/application-gateway-before-azure-firewall), where the Azure Application Gateway sits in front of the Azure Firewall. The HTTP(S) traffic passes through those devices before getting to the backend services (API Management, App Service etc).
+We'll be using a specific architectural scenario, which is the [Zero-trust network for web applications with Azure Firewall and Application Gateway](https://learn.microsoft.com/en-us/azure/architecture/example-scenario/gateway/application-gateway-before-azure-firewall){:target="_blank"}, where the Azure Application Gateway sits in front of the Azure Firewall. The HTTP(S) traffic passes through those devices before getting to the backend services (API Management, App Service etc).
 
 ![Architecture diagram showing the packet flow in a web app network that uses Application Gateway in front of Azure Firewall Premium.](/images/2024-03-26-TLS-Inspection.png){:.centered}
 
@@ -24,11 +24,11 @@ When looking at the end-to-end TLS connection between the user and the backend s
 
 To decrypt and inspect TLS traffic, Azure Firewall Premium dynamically generates certificates and presents itself to the Application Gateway as the web server. The Azure Firewall has to use an CA certificate to sign the certificates that it generates.
 
-The certificate used by Azure Firewall for TLS Inspection has [very specific requirements](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#intermediate-ca-certificate-requirements).
+The certificate used by Azure Firewall for TLS Inspection has [very specific requirements](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#intermediate-ca-certificate-requirements){:target="_blank"}.
 
 ## Options
 
-There are 3 options when configuring Azure Firewall with a CA certificate to be used for TLS Inspection, according to the official Microsoft documentation [Azure Firewall Premium Certificates](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#configure-a-certificate-in-your-policy):
+There are 3 options when configuring Azure Firewall with a CA certificate to be used for TLS Inspection, according to the official Microsoft documentation [Azure Firewall Premium Certificates](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#configure-a-certificate-in-your-policy){:target="_blank"}:
 
 1. Create your own self-signed certificate
 2. Use your enterprise PKI to create an Intermediate CA certificate
@@ -38,19 +38,19 @@ I'll go through each option, discuss some Pros and Cons, identify some limitatio
 
 ### Option 1 - Create your own self-signed certificate
 
-For Dev/Test environments, Microsoft suggest [creating a self-signed sertificate](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#create-your-own-self-signed-ca-certificate) using OpenSSL and their provided config file with either the Bash or PowerShell script to generate root CA and intermediate CA certificates that you can then use on the Azure Application Gateway and AzureFirewall resources (respectively).
+For Dev/Test environments, Microsoft suggest [creating a self-signed sertificate](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#create-your-own-self-signed-ca-certificate){:target="_blank"} using OpenSSL and their provided config file with either the Bash or PowerShell script to generate root CA and intermediate CA certificates that you can then use on the Azure Application Gateway and AzureFirewall resources (respectively).
 
 **OpenSSL command-line?! What about Terraform?**
 
 I'm glad you asked, because I spent a fair amount of time on this.
 
-First of all, I tried using the [azurerm_key_vault_certificate](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_certificate) resource but eventually discovered that the azurerm provider - or rather the Azure SDK - does not support the *Basic_Constraints* attribute required for the certificate, which is used to set the *is_ca_certitifcate* and *pathlength* properties. These certificate attribute properties are required to allow the Azure Firewall to issue temporary certificates for the TLS connection created by the Application Gateway.
+First of all, I tried using the [azurerm_key_vault_certificate](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_certificate){:target="_blank"} resource but eventually discovered that the azurerm provider - or rather the Azure SDK - does not support the *Basic_Constraints* attribute required for the certificate, which is used to set the *is_ca_certitifcate* and *pathlength* properties. These certificate attribute properties are required to allow the Azure Firewall to issue temporary certificates for the TLS connection created by the Application Gateway.
 
 **After engaging Microsoft Support, they provided confirmation from the Azure Key Vault product group that there are *currently* no plans to support these features in the Azure SDK.**
 
 "Don't worry!", I hear you cry, "You can use the Hashicorp TLS provider instead."
 
-Yes and no... The [self_signed_cert](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/self_signed_cert) and [locally_signed_cert](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/locally_signed_cert) resources do have a *is_ca_certificate* property, BUT they do not support the required *pathlength* property. In fact, there is an outstanding, and slightly confusing, enhancement request to [add max_path_length in tls_locally_signed_cert](https://github.com/hashicorp/terraform-provider-tls/issues/296) to Hashicorp's TLS provider.
+Yes and no... The [self_signed_cert](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/self_signed_cert){:target="_blank"} and [locally_signed_cert](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/locally_signed_cert){:target="_blank"} resources do have a *is_ca_certificate* property, BUT they do not support the required *pathlength* property. In fact, there is an outstanding, and slightly confusing, enhancement request to [add max_path_length in tls_locally_signed_cert](https://github.com/hashicorp/terraform-provider-tls/issues/296){:target="_blank"} to Hashicorp's TLS provider.
 
 **Summary:**
 
@@ -67,11 +67,11 @@ CONS:
 
 Issues:
 
-- Neither the [azurerm_key_vault_certificate](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_certificate), [self_signed_cert](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/self_signed_cert) or [locally_signed_cert](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/locally_signed_cert) resources *currently* support creating the required intermediate CA certificate
+- Neither the [azurerm_key_vault_certificate](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_certificate), [self_signed_cert](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/self_signed_cert){:target="_blank"} or [locally_signed_cert](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/locally_signed_cert){:target="_blank"} resources *currently* support creating the required intermediate CA certificate
 
 ### Option 2 - Use your enterprise PKI to create an Intermediate CA certificate
 
-For Production environments, Microsoft recommends [deploying a certificate issued from your enterprise PKI](https://learn.microsoft.com/en-us/azure/firewall/premium-deploy-certificates-enterprise-ca). That is fine, so long as it complies with [Microsoft's certificate requirements](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#intermediate-ca-certificate-requirements) and your enterprise security standards.
+For Production environments, Microsoft recommends [deploying a certificate issued from your enterprise PKI](https://learn.microsoft.com/en-us/azure/firewall/premium-deploy-certificates-enterprise-ca){:target="_blank"}. That is fine, so long as it complies with [Microsoft's certificate requirements](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#intermediate-ca-certificate-requirements){:target="_blank"} and your enterprise security standards.
 
 The latter was an issue for the customer I was working with because they DO NOT issue Intermediate CA certificates directly from their root CA. In fact, this was the certificate chain that was initially issued to the DMZ Azure Firewall;
 
@@ -96,7 +96,7 @@ Issues:
 
 ### Option 3 - Certificate auto-generation
 
-The Azure Portal allows you to [auto-generate](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#certificate-auto-generation) the required Managed Identity, Key Vault and Self-Signed Certificate on your Azure Firewall. This also includes a certificate issuance policy that will auto-renew the certificate, minimising certificate management for your security operations team.
+The Azure Portal allows you to [auto-generate](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#certificate-auto-generation){:target="_blank"} the required Managed Identity, Key Vault and Self-Signed Certificate on your Azure Firewall. This also includes a certificate issuance policy that will auto-renew the certificate, minimising certificate management for your security operations team.
 
 The obvious drawbacks of this are that "vanilla" resources are created, without any of the standard operational and security configuration that your organisation may normally apply when deploying these resources, such as naming convention, Service / Private Endpoints, Certificate Contacts, Diagnostic Settings etc. So, you have to retrospectively add these modifications afterwards.
 
@@ -125,8 +125,8 @@ My guidance is that you generate the Intermediate CA certificate using one of th
 
 1. Use your enterprise PKI if:
    1. It conforms to your enterprise security standards, and
-   2. The resulting certificate adheres to [Microsoft's certificate requirements](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#intermediate-ca-certificate-requirements).
-2. Use Microsoft's config & script(s) for [creating a self-signed sertificate](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#create-your-own-self-signed-ca-certificate) if:
+   2. The resulting certificate adheres to [Microsoft's certificate requirements](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#intermediate-ca-certificate-requirements){:target="_blank"}.
+2. Use Microsoft's config & script(s) for [creating a self-signed sertificate](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#create-your-own-self-signed-ca-certificate){:target="_blank"} if:
    1. You need to automate the creation of the certificate
    2. Your enterprise security team sign-off on the risks of this approach
 3. Use the Azure Portal if:
