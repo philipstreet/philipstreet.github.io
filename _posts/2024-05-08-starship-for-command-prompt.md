@@ -12,9 +12,11 @@ Yes you can! Here's mine, which looks almost exactly like my PowerShell and WSL 
 
 ![Command Prompt](/images/2024-05-08-starship-command-prompt.png)
 
-Customising the Command Prompt using Starship is achieved using a tool called [Clink](https://chrisant996.github.io/clink/clink.html){:target="_blank"}.
+These instructions assume you have already configured Starship as per my previous blog post. If not, follow those instructions first before proceeding.
 
 ### Step 1: Install Clink using Scoop
+
+Customising the Command Prompt using Starship is achieved using a tool called [Clink](https://chrisant996.github.io/clink/clink.html){:target="_blank"}.
 
 The first step is to install Clink, which is as simple as opening Windows Terminal and running the following PowerShell;
 
@@ -33,7 +35,7 @@ os.setenv('STARSHIP_CONFIG', 'C:\\Users\\?\\.config\\starship\\starship.toml')
 load(io.popen('starship init cmd'):read("*a"))()
 {% endhighlight %}
 
-Replace "?" with the relevant Windows "username" so that the path is valid. This means that the Command Prompt will use the same Starship configuration file as both your Windows Terminal AND WSL instance, ensuring consistency across both platforms!
+Replace "?" with the relevant Windows "username" so that the path is valid, or modify the path to where you have your Starship TOML file saved. This means that the Command Prompt will use the same Starship configuration file as both your Windows Terminal AND WSL instance, ensuring consistency across all prompts!
 
 ## And there's more!
 
