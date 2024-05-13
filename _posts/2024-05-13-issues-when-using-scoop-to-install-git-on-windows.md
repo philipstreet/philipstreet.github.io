@@ -44,7 +44,7 @@ git config --global credential.helper manager
 
 ## What about WSL?
 
-The above will fix things for Windows, but what about WSL? Well, you _can_ install GCM in WSL as well but means having separate credential stores. The best experience is let GCM share credentials & settings between WSL and the Windows host. This can be achieved by doing the following.
+The above will fix things for Windows, but what about WSL? Well, you _can_ install GCM in WSL as well but that means having separate credential stores. The best experience is to let GCM share credentials & settings between WSL and the Windows host. This can be achieved by doing the following.
 
 _Inside your WSL installation_, run the following command to set GCM as the Git credential helper installed by Scoop, which will not be in the default location indicated on [GCM on Windows Subsystem for Linux (WSL)](https://github.com/git-ecosystem/git-credential-manager/blob/release/docs/wsl.md):
 
