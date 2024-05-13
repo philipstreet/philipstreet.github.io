@@ -10,17 +10,17 @@ Using [Scoop](https://scoop.sh){:target="_blank"} to install tools without eleva
 
 Install Git on Windows is easy, just run the following;
 
-```powershell
+{% highlight powershell %}
 scoop install main\git
-```
+{% endhighlight %}
 
 I first realised something was wrong when I was trying to clone a repo from an Azure DevOps organisation I had not worked with for several weeks. I was getting the following;
 
-``` powershell
+{% highlight powershell %}
 ❯  git clone https://[organisation]@dev.azure.com/[organisation]/[project-name]/_git/[repository-name]
 Cloning into '[repository-name]'...
 Password for 'https://[organisation]@dev.azure.com':
-```
+{% endhighlight %}
 
 That's weird! I'm sure I wasn't prompted to enter a password the last time I did this...In fact, I'm pretty sure I just logged in via the usual Microsoft Entra ID authentication flow (including MFA). The only thing that had changed was that I had re-installed Git using Scoop.
 
@@ -30,17 +30,17 @@ After a bit of frantic Googling, I realised that [Git Credential Manager](https:
 
 this is easily resolved by simply installing GCM using Scoop:
 
-``` powershell
+{% highlight powershell %}
 scoop bucket add extras
 scoop install extras/git-credential-manager
-```
+{% endhighlight %}
 
 Additionally, I need to configure Git to use GCM:
 
-``` powershell
+{% highlight powershell %}
 git config --global credential.store manager
 git config --global credential.helper manager
-```
+{% endhighlight %}
 
 ## What about WSL?
 
@@ -48,12 +48,12 @@ The above will fix things for Windows, but what about WSL? Well, you _can_ insta
 
 _Inside your WSL installation_, run the following command to set GCM as the Git credential helper installed by Scoop, which will not be in the default location indicated on [GCM on Windows Subsystem for Linux (WSL)](https://github.com/git-ecosystem/git-credential-manager/blob/release/docs/wsl.md):
 
-``` bash
+{% highlight bash %}
 git config --global credential.helper "/mnt/c/Users/[username]/scoop/shims/git-credential-manager.exe"
 
-# For Azure DevOps support only
+\# For Azure DevOps support only
 git config --global credential.https://dev.azure.com.useHttpPath true
-```
+{% endhighlight %}
 
 > **Note:** change [username] so that the path is valid.
 
