@@ -28,7 +28,7 @@ That's weird! I'm sure I wasn't prompted to enter a password the last time I did
 
 After a bit of frantic Googling, I realised that [Git Credential Manager](https://github.com/git-ecosystem/git-credential-manager){:target="_blank"} had not been installed. Doh!
 
-this is easily resolved by simply installing GCM using Scoop:
+This is easily resolved by simply installing GCM using Scoop:
 
 {% highlight powershell %}
 scoop bucket add extras
