@@ -10,7 +10,7 @@ I recently worked with a customer that wanted to deploy a conventional DMZ envir
 
 This article specifically describes my challenges with configuring TLS Inspection in an enterprise environment.
 
-**UPDATED on 19th May 2024 after receiving a few comments and questions about [Let's Encrypt](#what-about-lets-encrypt) and [managed private PKI](#option-4---purchase-a-managed-ca-private-pki-new).**
+**UPDATED on 19th May 2024 after receiving a few comments and questions about [Let's Encrypt](#what-about-lets-encrypt) and [managed private PKI](#option-4---purchase-a-managed-private-pki).**
 
 ## Architecture
 
@@ -124,11 +124,11 @@ Issues:
 
 - The valid certificate created via the Azure Portal cannot be exported, or replicated using automation as it is not supported by the Azure SDK.
 
-### Option 4 - Purchase a managed CA private PKI (New)
+### Option 4 - Purchase a managed private PKI
 
-I've added this option as I had ommited it from the original article. I did discuss it with the customer but they decided against it - for the time being - as it would've required a load of effort from a procurement and service management perspective, as well as having to align with, or at least consider, the enterprise strategic approach to PKI,and so did not align with the project timescales.
+I've added this option as I had ommited it from the original article. I did discuss it with the customer but they decided against it - for the time being - as it would've required a load of effort from a procurement and service management perspective, as well as having to align with, or at least consider, the enterprise strategic approach to PKI, and so did not align with the project timescales.
 
-Essentially, this option involves purchasing a managed private PKI service, such as the one from [GlobalSign](https://www.globalsign.com/en/custom-ca-private-pki){:target="_blank"}. This would theroetically give you a root and intermediate CA, which you could configure on your Application Gateway and Azure Firewall (respectively).
+Essentially, this option involves purchasing a managed private PKI service, such as the one from [GlobalSign](https://www.globalsign.com/en/custom-ca-private-pki){:target="_blank"}. This would theoretically give you a root and intermediate CA, which you could configure on your Application Gateway and Azure Firewall (respectively).
 
 To be honest, I have not fully explored how this would technically work and there are a number of questions I didn't have time to answer:
 
