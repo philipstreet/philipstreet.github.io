@@ -52,7 +52,8 @@ _Inside your WSL installation_, run the following command to set GCM as the Git 
 git config --global credential.helper "/mnt/c/Users/[username]/scoop/shims/git-credential-manager.exe"
 
 # For Azure DevOps support only
-git config --global credential.https://dev.azure.com.useHttpPath true
+
+git config --global credential.<https://dev.azure.com.useHttpPath> true
 {% endhighlight %}
 
 > **Note:** change [username] so that the path is valid.
