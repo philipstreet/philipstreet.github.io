@@ -10,6 +10,8 @@ I recently worked with a customer that wanted to deploy a conventional DMZ envir
 
 This article specifically describes my challenges with configuring TLS Inspection in an enterprise environment.
 
+**UPDATED on 19th May 2024 after receiving a few comments and questions about [Let's Encrypt](#what-about-lets-encrypt) and [managed private PKI](#option-4---purchase-a-managed-private-pki).**
+
 ## Architecture
 
 We'll be using a specific architectural scenario, which is the [Zero-trust network for web applications with Azure Firewall and Application Gateway](https://learn.microsoft.com/en-us/azure/architecture/example-scenario/gateway/application-gateway-before-azure-firewall){:target="_blank"}, where the Azure Application Gateway sits in front of the Azure Firewall. The HTTP(S) traffic passes through those devices before getting to the backend services (API Management, App Service etc).
@@ -28,11 +30,12 @@ The certificate used by Azure Firewall for TLS Inspection has [very specific req
 
 ## Options
 
-There are 3 options when configuring Azure Firewall with a CA certificate to be used for TLS Inspection, according to the official Microsoft documentation [Azure Firewall Premium Certificates](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#configure-a-certificate-in-your-policy){:target="_blank"}:
+There are 4 options when configuring Azure Firewall with a CA certificate to be used for TLS Inspection, according to the official Microsoft documentation [Azure Firewall Premium Certificates](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#configure-a-certificate-in-your-policy){:target="_blank"}:
 
 1. Create your own self-signed certificate
 2. Use your enterprise PKI to create an Intermediate CA certificate
 3. Certificate auto-generation (via the Azure Portal)
+4. Purchase a managed private PKI
 
 I'll go through each option, discuss some Pros and Cons, identify some limitations, and talk about some of the issues I encountered.
 
@@ -40,17 +43,21 @@ I'll go through each option, discuss some Pros and Cons, identify some limitatio
 
 For Dev/Test environments, Microsoft suggest [creating a self-signed sertificate](https://learn.microsoft.com/en-us/azure/firewall/premium-certificates#create-your-own-self-signed-ca-certificate){:target="_blank"} using OpenSSL and their provided config file with either the Bash or PowerShell script to generate root CA and intermediate CA certificates that you can then use on the Azure Application Gateway and AzureFirewall resources (respectively).
 
-**OpenSSL command-line?! What about Terraform?**
+#### OpenSSL command-line?! What about Terraform?
 
 I'm glad you asked, because I spent a fair amount of time on this.
 
 First of all, I tried using the [azurerm_key_vault_certificate](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_certificate){:target="_blank"} resource but eventually discovered that the azurerm provider - or rather the Azure SDK - does not support the *Basic_Constraints* attribute required for the certificate, which is used to set the *is_ca_certitifcate* and *pathlength* properties. These certificate attribute properties are required to allow the Azure Firewall to issue temporary certificates for the TLS connection created by the Application Gateway.
 
-**After engaging Microsoft Support, they provided confirmation from the Azure Key Vault product group that there are *currently* no plans to support these features in the Azure SDK.**
+After engaging Microsoft Support, they provided confirmation from the Azure Key Vault product group that there are *currently* no plans to support these features in the Azure SDK.
 
-"Don't worry!", I hear you cry, "You can use the Hashicorp TLS provider instead."
+#### "Don't worry!", I hear you cry, "You can use the Hashicorp TLS provider instead."
 
 Yes and no... The [self_signed_cert](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/self_signed_cert){:target="_blank"} and [locally_signed_cert](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/locally_signed_cert){:target="_blank"} resources do have a *is_ca_certificate* property, BUT they do not support the required *pathlength* property. In fact, there is an outstanding, and slightly confusing, enhancement request to [add max_path_length in tls_locally_signed_cert](https://github.com/hashicorp/terraform-provider-tls/issues/296){:target="_blank"} to Hashicorp's TLS provider.
+
+#### What about Let's Encrypt?
+
+Unfortunately, Let's Encrypt can only issue X.509 certificates to enable HTTPS on websites, they do not issue intermediate CA certificates.
 
 **Summary:**
 
@@ -116,6 +123,30 @@ CONS:
 Issues:
 
 - The valid certificate created via the Azure Portal cannot be exported, or replicated using automation as it is not supported by the Azure SDK.
+
+### Option 4 - Purchase a managed private PKI
+
+I've added this option as I had ommited it from the original article. I did discuss it with the customer but they decided against it - for the time being - as it would've required a load of effort from a procurement and service management perspective, as well as having to align with, or at least consider, the enterprise strategic approach to PKI, and so did not align with the project timescales.
+
+Essentially, this option involves purchasing a managed private PKI service, such as the one from [GlobalSign](https://www.globalsign.com/en/custom-ca-private-pki){:target="_blank"}. This would theoretically give you a root and intermediate CA, which you could configure on your Application Gateway and Azure Firewall (respectively).
+
+To be honest, I have not fully explored how this would technically work and there are a number of questions I didn't have time to answer:
+
+- Would GlobalSign issue the root CA but then you use that to issue the intermediate CA?
+- Could this leverage the native [Key Vault integration with Certificate Authorities](https://learn.microsoft.com/en-us/azure/key-vault/certificates/how-to-integrate-certificate-authority){:target="_blank"}?
+- How much would such a service cost, and is it value for money for this specific use case? It sounds like a service that might cost a lot to procure.
+
+**Summary:**
+
+PROS:
+
+- Provides a managed enterprise PKI service
+
+CONS:
+
+- May conflict with, or require alignment with, your enterprise PKI strategy
+- Will require time to go through procurement and service management processes
+- Potential high-cost for this specific use case
 
 ## Wrap-up
 
