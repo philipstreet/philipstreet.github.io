@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-I'm Philip Street and I'm an experienced Azure Architect, currently working for Barings Asset Management. Find out more on my [LinkedIn page](https://www.linkedin.com/in/philipstreet/).
+I'm Philip Street and I'm an experienced Azure Architect, currently working for Barings Asset Management. Find out more on my [LinkedIn page](https://www.linkedin.com/in/philipstreet/){:target="_blank"}.
 
 I have following Microsoft Azure certifications:
 
